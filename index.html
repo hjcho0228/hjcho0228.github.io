@@ -1,1 +1,714 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hyungjun Jo | Research Homepage</title>
+  <meta name="description" content="조형준의 연구 소개 홈페이지입니다. LLM, Privacy, Personalized AI, Responsible AI 연구를 소개합니다." />
+  <style>
+    :root {
+      --bg: #fffcf5;
+      --border: #e8e1d7;
+      --text: #83624a;
+      --title: #6d4c34;
+      --accent: #bc6045;
+      --card: #fffaf2;
+      --shadow: 0 10px 30px rgba(109, 76, 52, 0.08);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max-width: 1180px;
+    }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 252, 245, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--title);
+      letter-spacing: -0.02em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--text);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: #f7efe4;
+      color: var(--accent);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      padding: 32px 0 60px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+    }
+
+    .profile-card,
+    .section-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card {
+      padding: 24px;
+    }
+
+    .profile-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 0 auto 20px;
+      border: 4px solid #f5ece0;
+      background: #f2e8da;
+    }
+
+    .profile-name {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--title);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .profile-role {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+
+    .profile-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .tag {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #f7efe4;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: #fffdf9;
+    }
+
+    .info-label {
+      min-width: 62px;
+      font-weight: 800;
+      color: var(--title);
+    }
+
+    .social-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .social-links a {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      background: #fffdf9;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .social-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .main {
+      display: grid;
+      gap: 24px;
+    }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(180deg, #fffaf2 0%, #fffdf8 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #f7efe4;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--title);
+    }
+
+    .hero p {
+      margin: 0 0 20px;
+      font-size: 1.08rem;
+      max-width: 800px;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fffaf6;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(0.97);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #fffdf9;
+      color: var(--title);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--title);
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub {
+      font-size: 0.96rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .about-text p {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 1.02rem;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .research-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #fffdf9;
+    }
+
+    .research-card h3 {
+      margin: 0 0 10px;
+      color: var(--title);
+      font-size: 1.12rem;
+    }
+
+    .research-card p {
+      margin: 0;
+      font-size: 0.97rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #fffdf9;
+    }
+
+    .timeline-date {
+      font-weight: 800;
+      color: var(--title);
+    }
+
+    .timeline-content strong {
+      color: var(--title);
+    }
+
+    .pub-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .pub-item {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: #fffdf9;
+    }
+
+    .pub-title {
+      font-size: 1.16rem;
+      font-weight: 800;
+      color: var(--title);
+      margin-bottom: 8px;
+    }
+
+    .pub-authors,
+    .pub-venue {
+      font-size: 0.97rem;
+      margin-bottom: 6px;
+    }
+
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .pub-links a {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #f7efe4;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--accent);
+    }
+
+    .contact-box {
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .contact-box p {
+      max-width: 700px;
+      margin: 0 auto 18px;
+    }
+
+    footer {
+      padding: 24px 0 44px;
+      color: var(--text);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .small-muted {
+      font-size: 0.93rem;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 1024px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 20px, var(--max-width));
+      }
+
+      .topbar-inner {
+        min-height: 64px;
+      }
+
+      .hero,
+      .section-card,
+      .profile-card {
+        padding: 20px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .profile-photo {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#top" class="brand">Hyungjun Jo</a>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container layout">
+    <aside class="sidebar">
+      <div class="profile-card">
+        <div class="profile-photo">
+          <img src="profile.jpg" alt="조형준 프로필 사진" />
+        </div>
+
+        <div class="profile-name">Jo Hyungjun</div>
+        <div class="profile-role">
+          Undergraduate Researcher<br />
+          DGIST Computer Science and Engineering
+        </div>
+
+        <div class="profile-tags">
+          <span class="tag">LLM</span>
+          <span class="tag">Privacy</span>
+          <span class="tag">Personalization</span>
+        </div>
+
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-label">Affil.</div>
+            <div>DGIST CSE / Lab Name</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Focus</div>
+            <div>Privacy-preserving LLMs, Personalized AI, Responsible AI</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email</div>
+            <div>your_email@example.com</div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="#" target="_blank">CV</a>
+          <a href="#" target="_blank">Google Scholar</a>
+          <a href="#" target="_blank">GitHub</a>
+          <a href="#" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </aside>
+
+    <section class="main">
+      <section class="hero">
+        <div class="eyebrow">Research Homepage</div>
+        <h1>
+          Building <span class="highlight">trustworthy and personalized</span><br />
+          AI systems for real-world impact
+        </h1>
+        <p>
+          안녕하세요. 저는 <span class="highlight">조형준</span>이며,
+          LLM의 개인화, 프라이버시 보호, 그리고 사회적으로 책임 있는 AI 시스템을 연구합니다.
+          사용자의 맥락을 더 잘 이해하면서도 민감한 정보를 안전하게 다루는 모델과 시스템에 관심이 있습니다.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#research">Research Overview</a>
+          <a class="btn btn-secondary" href="#publications">Selected Publications</a>
+          <a class="btn btn-secondary" href="#contact">Contact</a>
+        </div>
+      </section>
+
+      <section id="about" class="section-card">
+        <div class="section-head">
+          <h2 class="section-title">About</h2>
+          <div class="section-sub">누구인지, 무엇을 연구하는지 3초 안에 보이도록</div>
+        </div>
+
+        <div class="about-text">
+          <p>
+            저는 DGIST 컴퓨터공학과에서 공부하고 있으며,
+            <span class="highlight">대규모 언어모델(LLM)의 개인화와 프라이버시 보호</span>를 중심으로 연구하고 있습니다.
+            특히 사용자의 선호와 문맥을 반영하면서도 민감정보를 직접 노출하지 않는 추론 방식,
+            그리고 실제 사용자에게 도움이 되는 안전한 AI 에이전트 설계에 관심이 있습니다.
+          </p>
+          <p>
+            최근에는 <span class="highlight">privacy-preserving post-training</span>,
+            reasoning control, personalized QA, trustworthy evaluation,
+            그리고 사회적 맥락을 이해하는 LLM의 능력 분석에 흥미를 가지고 있습니다.
+          </p>
+          <p class="small-muted">
+            이 부분은 네 자기소개 문장으로 바꾸면 돼. 2~3문단 정도가 가장 보기 좋다.
+          </p>
+        </div>
+      </section>
+
+      <section id="research" class="section-card">
+        <div class="section-head">
+          <h2 class="section-title">Research Interests</h2>
+          <div class="section-sub">유사한 카드 구조로 관심 분야를 빠르게 인식</div>
+        </div>
+
+        <div class="research-grid">
+          <article class="research-card">
+            <h3>Privacy-Preserving LLMs</h3>
+            <p>
+              사용자 정보와 민감 컨텍스트를 직접 노출하지 않으면서도
+              개인화된 응답을 생성하는 모델 및 학습/추론 구조를 연구합니다.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <h3>Personalized AI Systems</h3>
+            <p>
+              사용자의 장기적 선호, 대화 맥락, 제약 조건을 반영하여
+              더 유용하고 일관된 응답을 생성하는 개인화 시스템에 관심이 있습니다.
+            </p>
+          </article>
+
+          <article class="research-card">
+            <h3>Trustworthy Evaluation</h3>
+            <p>
+              LLM-as-a-Judge, human-aligned evaluation, sociocultural capability analysis처럼
+              모델 평가의 신뢰성과 타당성을 높이는 방법을 탐구합니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="news" class="section-card">
+        <div class="section-head">
+          <h2 class="section-title">News</h2>
+          <div class="section-sub">근접성 원칙에 따라 최근 소식을 한 곳에 묶음</div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Mar 2026</div>
+            <div class="timeline-content">
+              <strong>Example:</strong> Started a new project on privacy-aware reasoning for personalized LLM systems.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Feb 2026</div>
+            <div class="timeline-content">
+              <strong>Example:</strong> Presented research ideas on trustworthy personalization at lab seminar.
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Jan 2026</div>
+            <div class="timeline-content">
+              <strong>Example:</strong> Updated homepage and added current research interests and publications.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="publications" class="section-card">
+        <div class="section-head">
+          <h2 class="section-title">Selected Publications</h2>
+          <div class="section-sub">중요한 정보는 제목-저자-학회-링크 순으로 명확하게</div>
+        </div>
+
+        <div class="pub-list">
+          <article class="pub-item">
+            <div class="pub-title">
+              Paper Title Comes Here
+            </div>
+            <div class="pub-authors">
+              <strong>Authors:</strong> Your Name, Coauthor A, Coauthor B
+            </div>
+            <div class="pub-venue">
+              <strong>Venue:</strong> Conference / Journal / Workshop, 2026
+            </div>
+            <div class="pub-links">
+              <a href="#" target="_blank">Paper</a>
+              <a href="#" target="_blank">Code</a>
+              <a href="#" target="_blank">Poster</a>
+            </div>
+          </article>
+
+          <article class="pub-item">
+            <div class="pub-title">
+              Another Research Project or Publication
+            </div>
+            <div class="pub-authors">
+              <strong>Authors:</strong> Your Name, Collaborator Names
+            </div>
+            <div class="pub-venue">
+              <strong>Venue:</strong> arXiv / Under Review / Workshop, 2026
+            </div>
+            <div class="pub-links">
+              <a href="#" target="_blank">PDF</a>
+              <a href="#" target="_blank">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section-card contact-box">
+        <div class="section-head" style="justify-content:center;">
+          <h2 class="section-title">Contact</h2>
+        </div>
+        <p>
+          연구 협업, 프로젝트 제안, 세미나 발표, 대학원 진학 관련 대화 모두 환영합니다.
+          아래 이메일이나 링크를 통해 편하게 연락 주세요.
+        </p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:your_email@example.com">Email Me</a>
+          <a class="btn btn-secondary" href="#" target="_blank">Google Scholar</a>
+          <a class="btn btn-secondary" href="#" target="_blank">GitHub</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Jo Hyungjun. Built with GitHub Pages.
+    </div>
+  </footer>
+</body>
+</html>
